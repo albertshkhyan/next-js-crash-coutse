@@ -66,6 +66,7 @@ export default function Post({ post: serverPost }) {
 //   return {}//always must return something
 // }
 
+////# 1 varant -  COMBINE FTONTEND AND BACKEND
 Post.getInitialProps = async ({ query, req }) => {
 
   if (!req) {//#if we is in client
@@ -80,3 +81,18 @@ Post.getInitialProps = async ({ query, req }) => {
     post
   }
 }
+
+////# 2 variant - only backend
+
+// export async function getServerSideProps({ query, req }) {
+
+//   // if (!req) {//#if we is in client
+//   //   return { posts: null }
+//   // }
+//   const res = await fetch(`http://localhost:4200/posts/${query.id}`);
+//   const post = await res.json();
+//   console.log('post', post);
+//   return {
+//     props: { post }, // will be passed to the page component as props
+//   }
+// }
