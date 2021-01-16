@@ -1,0 +1,19 @@
+{
+	"posts": [
+		{
+			"id": 1,
+			"title": "Post about Healt",
+			"body": "Qui aute eiusmod quis commodo occaecat tempor quis eiusmod nostrud incididunt cupidatat dolor."
+		},
+		{
+			"id": 2,
+			"title": "Post about JavaScript",
+			"body": "Laborum occaecat elit pariatur amet dolore aliqua reprehenderit ipsum aute laboris."
+		},
+		{
+			"id": 2,
+			"title": "Post about Rest",
+			"body": "Elit laborum qui qui officia laborum et enim laborum aliquip veniam enim pariatur cupidatat."
+		}
+	]
+}

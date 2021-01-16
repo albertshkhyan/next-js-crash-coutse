@@ -415,3 +415,69 @@ Next.js generate own 404 error page
 ├─── 404.js
   ```
 
+
+<hr>
+
+## 10. Create API *mock servers (макет сервера)
+☝⚠👉 mock (imitation, fake)
+
+install json-server - (Imitation of server) create REST api without coding. With this packge we will create backend for prototyping (implementation) API.
+
+* Install JSON Server
+```
+npm install -g json-server
+```
+* Add db.json
+
+```js
+{
+	"posts": [
+		{
+			"id": 1,
+			"title": "Post about Healt",
+			"body": "Qui aute eiusmod quis commodo occaecat tempor quis eiusmod nostrud incididunt cupidatat dolor."
+		},
+		{
+			"id": 2,
+			"title": "Post about JavaScript",
+			"body": "Laborum occaecat elit pariatur amet dolore aliqua reprehenderit ipsum aute laboris."
+		},
+		{
+			"id": 2,
+			"title": "Post about Rest",
+			"body": "Elit laborum qui qui officia laborum et enim laborum aliquip veniam enim pariatur cupidatat."
+		}
+	]
+}
+
+```
+
+* Start JSON Server
+```js
+    "mock": "json-server --watch db.json -p 4200 -d 400"
+```
+`-p 4200` - this is port
+<br>
+`-d 400` - this is delay, after 400 mill second will start mock server
+
+```
+npm run mock
+```
+
+```
+\{^_^}/ hi!
+
+  Loading db.json
+  Done
+
+  Resources
+  http://localhost:4200/posts
+
+  Home
+  http://localhost:4200
+
+  Type s + enter at any time to create a snapshot of the database
+  Watching...
+
+GET /posts 200 408.668 ms - 485
+```
