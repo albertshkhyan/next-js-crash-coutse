@@ -5,12 +5,6 @@ function MyApp({ Component, pageProps }) {
     <>
 
       <Component {...pageProps} />
-
-      <style jsx global>{`
-        body {
-          font-family: 'Roboto', sans-serif;
-        }
-      `}</style>
     </>
   )
 }

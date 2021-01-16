@@ -356,7 +356,7 @@ export default MyApp
     </InterceptorBoundary>
 ```
 * We can add gloabal css.
-  * variant 1
+  * variant 1 
 ```js
 // Website global styles
 import '../assets/styles/common/fonts.scss';
@@ -401,3 +401,17 @@ export default MyApp
 
 
 ```
+
+<hr>
+
+## 9. Handle custom 404 error page
+
+Next.js generate own 404 error page
+
+![404 error of Next.js ](https://i.imgur.com/20LwvDh.png)
+
+  ``` 
+├── pages
+├─── 404.js
+  ```
+
