@@ -7,6 +7,8 @@
 ###### ⚠ no have html.
 ###### ⚠ Ranking - it's special algorithms with which search robot determine place of a site. 
 
+<hr>
+
 ##  1. Routeing we create throght *file system* 
   * How run next app ?
     * npm run dev
@@ -39,6 +41,7 @@ export defualt function Index() {
       
 ```  
 
+<hr>
 
 ## 3. Routeing and Naviagtion
 
@@ -94,6 +97,7 @@ App whcih will show post of lists
 │     └── index.js //localHost:3000/about 👉 😎 grouping rotues
   ```
 
+<hr>
 
 ## 4.  When change page ocurd reload of page
 
@@ -127,6 +131,7 @@ import Link from "next/link";
       <p><Link href="/posts">Posts</Link></p> 
 ```
 
+<hr>
 
 ## 5. Navigation with program
 
@@ -153,7 +158,9 @@ export default function About() {
 
 <hr>
 
-## How dynamicly change of title with next ?
+## 6. SEO + META (Head componetn of next)
+
+### How dynamicly change of title with next ?
 
 ### For this used special next component Head
 
@@ -192,6 +199,9 @@ export default function Home() {
 
 * In Head component we can add meta tags
 
+
+### Add meta tags for special page
+
 ```js
 import { useRouter } from 'next/router'
 import Head from "next/head";
@@ -216,3 +226,28 @@ export default function Post() {
   )
 }
 ```
+
+
+#### 👉⚠☝ *For add universal meta tags for all pages we must use Layouts*. 
+
+
+
+<hr>
+
+
+## 7. Layouts
+
+* ###  *Layout -  it's some structure that allows combine pages.*
+
+
+* How create layouts in next ?
+  * For this in the main level (root folder of app) we can createa new folder.
+```
+ For implement layots
+  we cant create components/layouts (any name) folder
+├── components
+├─── posts 
+│     └── MainLayout.js   
+  ```
+
+  
