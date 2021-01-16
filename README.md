@@ -250,4 +250,154 @@ export default function Post() {
 │     └── MainLayout.js   
   ```
 
-  
+
+
+  <hr>
+
+
+## 8. Styles, Modules, SASS
+
+* How add fonts ?
+
+* <span style="color: green;">By defalult next.js generate own structure for overide that strucrre we can use document.</span>
+* Custom Document
+  * *_document* - it's special component which allow give alter structure for ourselves 
+    * To override the default `Document`, create the file `./pages/_document.js` and extend the `Document` class as shown below:
+
+
+
+
+```
+⚠  To override the default `Document`, create the file `./pages/_document.js` and extend the `Document` class as shown below:
+ 
+├── pages
+├─── _document.js  
+  ```
+
+
+```js
+//# DEFAULT DOCUMENT
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          <Main /> // in here stored our content (layouts, pages and etc)
+          <NextScript /> //this allow to work next.js
+        </body>
+      </Html>
+    )
+  }
+}
+
+export default MyDocument
+```
+
+
+```js
+//## CUSTOMIZED DOCUMENT
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
+  }
+
+  //## override document
+  render() {
+    return (
+      <Html>
+        <Head>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
+}
+
+export default MyDocument
+
+```
+
+## Custom `App`
+
+
+### Now how add global styles.
+#### For this we can use special global component which responsible for all our app.
+* With this app component causing server-side-render.
+```js
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+
+```
+* with this app we can handle custom bugs using.
+```js
+    <InterceptorBoundary>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+    </InterceptorBoundary>
+```
+* We can add gloabal css.
+  * variant 1
+```js
+// Website global styles
+import '../assets/styles/common/fonts.scss';
+import '../assets/styles/common/reset.scss';
+import '../assets/styles/common/ui.scss';
+import '../assets/styles/main.scss';
+```
+  * varoamt 2
+
+  ```js
+import '../styles/globals.css'
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+
+      <Component {...pageProps} />
+
+      <style jsx global>{`
+        body {
+          font-family: 'Roboto', sans-serif;
+        }
+      `}</style>
+    </>
+  )
+}
+
+export default MyApp
+
+  ```
+
+```js
+function MyApp({ Component, pageProps }) {
+  /**This is wrapper for all pages
+     * here come current component, in whcih url corresponding
+     * When change route this component renderd
+   */
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+
+
+```

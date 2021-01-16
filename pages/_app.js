@@ -1,11 +1,18 @@
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
-  /**This is wrapper for all pages
-     * here come current component, in whcih url corresponding
-     * When change route this component renderd
-   */
-  return <Component {...pageProps} />
+  return (
+    <>
+
+      <Component {...pageProps} />
+
+      <style jsx global>{`
+        body {
+          font-family: 'Roboto', sans-serif;
+        }
+      `}</style>
+    </>
+  )
 }
 
 export default MyApp
