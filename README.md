@@ -1,34 +1,132 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# About Next.js framework  
 
-## Getting Started
+## Why need next.js
 
-First, run the development server:
+###### ⚠ Seach robots can't see (index) content of pages of single page app. For this used next.js. 
+###### ⚠ in nex.js no have  entry point. 
+###### ⚠ no have html.
 
-```bash
-npm run dev
-# or
-yarn dev
+##  1. Routeing we create throght *file system* 
+  * How run next app ?
+    * npm run dev
+      <br>
+        this command generate .next folder (here stored static files)
+
+  ## 2. For create 1st page, we must create in root app  *pages*   folder (⚠ pages is rese rved word).
+
+* For first we will create first page.
+    
+```
+📁 pages
+      index.js // in this file we will create react component
+```
+ 
+```javascript
+//import React from 'react'☝❌
+export defualt function Index() {
+  return <h1>Hello Next.js</h1>
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Example 1 -  How work routing in next.js
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+📁 pages
+    about.js //export default function K() {return <h2>Hello</h2>}
+      routeing accurd with file name
+      ⚠☝ localHost:3000/about
+      
+```  
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 3. Routeing and Naviagtion
 
-## Learn More
+### Routing of next work based on file-system.
 
-To learn more about Next.js, take a look at the following resources:
+App whcih will show post of lists
+  * posts - for this we create in pages folder posts.js file. 
+  <br>
+  ⚠ But how use dynamic parameter (id) - for open special post.
+  *  *posts/223* - how open separate posts ? <- how create this url
+  How implement routing with dynamic parameter.
+ 
+  ```
+⚠  pages/posts.js - server render react in give it us.
+ 
+├── pages
+├─── posts 👈 we must create posts folder
+│     └── [id].js 👈 open post with dynamic paramter 
+│   posts.js 👈 open all posts
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ####   from next/router
+  ```js
 
-## Deploy on Vercel
+  export default function Post() {
+    const router = useRouter()
+    console.log('router', router);
+    console.log('router', router.query.id);//in here stored dynamic param (di === [id])
+.jd
+    return (
+      <h2>
+        Post with dynamic paramter
+      </h2>
+    )
+  }
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  ![what is useRouter](https://i.imgur.com/v1Tzn93.png.jpg)
+  ![what is useRouter](https://i.imgur.com/efba38v.png )
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+ 
+  ```
+⚠  pages/posts/index.js 
+⚠  pages/posts/[id].js - squate brackets used for dynamic params.
+
+
+ 
+├── pages
+├─── posts 
+│     └── posts.js //localHost:3000/about/about 👉 😯
+│     └── index.js //localHost:3000/about 👉 😎 grouping rotues
+  ```
+
+
+## 4.  When change page ocurd reload of page
+
+####  We can dyncmaicly display content *(using Link component)*
+#### how prevent realod of page
+
+```js
+export default function Home() {
+  return (
+    <div>
+      <h1>Hello Next.js</h1>
+      <p><a href="/about">About</a></p>
+      <p><a href="/posts">Posts</a></p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi quidem corporis consequuntur accusamus ipsum deserunt at. Qui nesciunt quis saepe. </p>
+    </div>
+  )
+}
+
+```
+
+![when click on some link occurd realod of page](https://i.imgur.com/kQ6aSR1.png)
+
+For prevent realoding we can use special component of next
+
+```js
+import Link from "next/link";
+
+// #
+
+      <p><Link href="/about">Aout</Link></p>
+      <p><Link href="/posts">Posts</Link></p> 
+```
+
+
+## 5. Navigation with program
+
+* Without Link component we can use *Router.push*
