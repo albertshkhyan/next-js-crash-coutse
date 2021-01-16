@@ -481,3 +481,151 @@ npm run mock
 
 GET /posts 200 408.668 ms - 485
 ```
+
+## 11.  Data Fetching: getInitialProps | Loading data
+
+### 👉⚠☝  With thic async function we transfer data to component.
+
+* When we suing SSR this case useless
+How do request to server in order for these data ro render there and then returned to use ready html.
+
+* Функция `getInitialProps` будет выполняться на стороне сервера, а также на стороне клиента, когда мы перейдем на новую страницу, используя компонент Link, как мы это делали.
+```js
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const res = await fetch("http://localhost:4200/posts");
+      const json = await res.json();
+      setPosts(json);
+    }
+    load()
+  }, [])
+```
+
+
+
+```js
+export default function Posts() {
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const res = await fetch("http://localhost:4200/posts");
+      const json = await res.json();
+      setPosts(json);
+    }
+    load()
+  }, [])
+
+  return (
+    <MainLayout title="All Post page">
+      <h2>
+        All Posts
+      </h2>
+
+      <pre>
+        {JSON.stringify(posts, null, 2)}
+      </pre>
+    </MainLayout>
+  )
+}
+```
+
+### getInitialProps
+
+* `getInitialProps` is an async function that can be added to any page as a *static method* . Take a look at the following example: 
+```js
+function Page({ stars }) {
+   return <div>Next stars: {stars}</div> 
+} 
+```
+
+Example
+```js
+import Document, { DocumentContext } from 'next/document';
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx);
+
+    return initialProps;
+  }
+}
+
+export default MyDocument;
+
+```
+
+* How use it
+
+``` js
+function Page({ stars }) {
+  return <div>Next stars: {stars}</div>
+}
+
+//Add static field << getInitialProps >>
+Page.getInitialProps = async (ctx) => {
+  //Here we write server code - HERE WE WRITE SERVER CODE
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const json = await res.json()
+  return { stars: json.stargazers_count }
+}
+
+export default Page
+```
+Or use with class
+```js
+import Document, { DocumentContext } from 'next/document';
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx);
+
+    return initialProps;
+  }
+}
+
+export default MyDocument;
+```
+
+
+Summary 
+
+### Example 1: we we not use getInitialProps 🤖 😨
+####  <div style="color: green;">We shouldn't make a request this way. Because search engines won't be able to index this data. </div>
+<br>
+
+![not use getInitialProps](https://i.imgur.com/6Z9ScET.png)
+
+### Example 2: we we use getInitialProps 😎 🤖
+
+![use getInitialProps](https://i.imgur.com/aThrZi4.png)
+
+
+* ### getInitialProps - Context Object
+
+`getInitialProps` receives a single argument called `context`, it's an object with the following properties:
+<br>
+
+ - `pathname` - Current route. That is the path of the page in */pages*
+ - `query` - Query string section of URL parsed as an object
+ - `asPath` - String of the actual path (including the query) shown in the browser
+ - `req` - HTTP request object (server only)
+ - `res` - HTTP response object (server only)
+ - `err` - Error object if any error is encountered during the rendering
+
+```js
+/** By default  getInitialProps take paramter < context > */
+/** By default  getInitialProps take paramter < context > */
+Post.getInitialProps = async (ctx) => {
+  console.log("ctx.query --------", ctx.query);// { id: '1' }
+
+  return {}//always must return something
+}
+```
+
+
+⚠☝ `getInitialProps` execute in server and clicent.
+### 
+
