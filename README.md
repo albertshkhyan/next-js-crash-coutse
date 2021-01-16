@@ -2,9 +2,10 @@
 
 ## Why need next.js
 
-###### ⚠ Seach robots can't see (index) content of pages of single page app. For this used next.js. 
+###### ⚠ Seach robots can't see (index, ranking) content of pages of single page app. For this used next.js. 
 ###### ⚠ in nex.js no have  entry point. 
 ###### ⚠ no have html.
+###### ⚠ Ranking - it's special algorithms with which search robot determine place of a site. 
 
 ##  1. Routeing we create throght *file system* 
   * How run next app ?
@@ -79,8 +80,8 @@ App whcih will show post of lists
   ![what is useRouter](https://i.imgur.com/v1Tzn93.png.jpg)
   ![what is useRouter](https://i.imgur.com/efba38v.png )
 
-
- 
+  
+  
   ```
 ⚠  pages/posts/index.js 
 ⚠  pages/posts/[id].js - squate brackets used for dynamic params.
@@ -130,3 +131,88 @@ import Link from "next/link";
 ## 5. Navigation with program
 
 * Without Link component we can use *Router.push*
+
+```js
+import Router from 'next/router';
+
+export default function About() {
+
+  //Router is special object for navigate programmatically
+  const handleGoBack = () => {
+    Router.push('/');
+  }
+  return (
+    <>
+      <h1>About page</h1>
+
+      <button onClick={handleGoBack}>Go back to home</button>
+    </>
+  )
+}
+```
+
+<hr>
+
+## How dynamicly change of title with next ?
+
+### For this used special next component Head
+
+* pages/index.js - Content of this page added in body tag. 
+  * We can use Head next component. 
+
+
+```js
+
+import Link from "next/link";
+
+import Head from "next/head";
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Next Home Hello</title>
+      </Head>
+
+      <div>
+        <h1>Hello Next.js</h1>
+        <p><Link href="/about">Aout</Link></p>
+        <p><Link href="/posts">Posts</Link></p>
+        <p>Lorem ipsum dolor sit</p>
+      </div>
+    </>
+  )
+}
+
+
+```
+
+![add title with next](https://i.imgur.com/MosDyfu.png)
+
+
+* In Head component we can add meta tags
+
+```js
+import { useRouter } from 'next/router'
+import Head from "next/head";
+
+export default function Post() {
+
+  const router = useRouter()
+  console.log('router', router);
+  return (
+    <>
+      <Head>
+        <title>Post page | id of post</title>
+        {/** Define keywords for search engines: */}
+        <meta name="keywords" content="post, postId" />
+        <meta name="description" content="This page show special post"></meta>
+
+      </Head>
+      <h2>
+        Post with dynamic paramter {router.query.id}
+      </h2>
+    </>
+  )
+}
+```
