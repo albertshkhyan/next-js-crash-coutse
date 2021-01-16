@@ -15,5 +15,9 @@
 			"title": "Post about Rest",
 			"body": "Elit laborum qui qui officia laborum et enim laborum aliquip veniam enim pariatur cupidatat."
 		}
-	]
+	],
+
+	"about": {
+		"title": "Page about us."
+	}
 }

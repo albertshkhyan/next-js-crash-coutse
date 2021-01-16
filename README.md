@@ -629,3 +629,25 @@ Post.getInitialProps = async (ctx) => {
 ⚠☝ `getInitialProps` execute in server and clicent.
 ### 
 
+<hr>
+
+## 11. getServerSideProps 
+
+* This function always called only in server side, for this not need check `!req`
+  * ⚠ getInitialProps work on client and on server. COMBINE FTONTEND AND BACKEND
+
+```js
+export async function getServerSideProps({ query, req }) {
+
+  // if (!req) {//#if we is in client
+  //   return { posts: null }
+  // }
+  
+  const res = await fetch(`http://localhost:4200/posts/${query.id}`);
+  const post = await res.json();
+  console.log('post', post);
+  return {
+    props: { post }, // will be passed to the page component as props
+  }
+}
+```
