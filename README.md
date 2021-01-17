@@ -651,3 +651,29 @@ export async function getServerSideProps({ query, req }) {
   }
 }
 ```
+
+
+<hr>
+
+## 12. Create API 
+
+  ``` 
+├── pages
+├─── api 
+│     └── echo.js 👈 create some endpoint
+  ```
+
+  ```js
+//here we work like in express.js
+
+export default function (req, res) {
+  res.statusCode = 200;
+  res.setHeaders("Content-Type", "aplication/json"); 
+  res.end(JSON.stringify({
+    message: req.query.message
+  }))
+}
+
+  ```
+
+  * ⚠☝ Authorization through local storage won't work, because we must recieve some data from server and for this neeed cookies.
