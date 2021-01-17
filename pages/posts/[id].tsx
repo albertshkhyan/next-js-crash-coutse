@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import { useRouter } from "next/router";
-import Head from "next/head";
 import Link from "next/link";
 
 import MainLayout from "../../components/MainLayout";
@@ -29,7 +28,7 @@ export default function Post({ post: serverPost }: IPostPageProps) {
 		//# if server give null and loading will be from client
 		debugger;
 		const load = async () => {
-			const res = await fetch(`http://localhost:4200/posts/${query.id}`);
+			const res = await fetch(`${process.env.API_URL}/posts/${query.id}`);
 			const post = await res.json();
 			setPost(post);
 		};

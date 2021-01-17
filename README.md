@@ -677,3 +677,10 @@ export default function (req, res) {
   ```
 
   * ⚠☝ Authorization through local storage won't work, because we must recieve some data from server and for this neeed cookies.
+
+
+<hr>
+
+## 13. next config
+
+* For custom advanced behavior of Next.js, you can create a `next.config.js` in the root of your project directory.
